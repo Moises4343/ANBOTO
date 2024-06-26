@@ -18,11 +18,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.deepPurple,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      initialRoute: '/', // Define la ruta inicial
+      initialRoute: '/',
       routes: {
         '/': (context) => const RegisterScreen(),
-        '/storeDetails': (context) =>
-            const StoreDetailsScreen(), // Añade la ruta para la nueva pantalla
+        '/storeDetails': (context) => const StoreDetailsScreen(),
       },
     );
   }

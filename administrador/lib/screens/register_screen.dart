@@ -8,8 +8,8 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  bool _isAccepted = false; // Variable para manejar el estado del checkbox
-  bool _isObscured = true; // Variable para manejar si la contraseña es visible
+  bool _isAccepted = false;
+  bool _isObscured = true;
 
   @override
   Widget build(BuildContext context) {
@@ -40,17 +40,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   const SizedBox(height: 20),
                   _buildTextInputField(context, 'Email', icon: Icons.email),
                   const SizedBox(height: 20),
-                  _buildPasswordInputField(
-                      context), // Campo de contraseña modificado
+                  _buildPasswordInputField(context),
                   const SizedBox(height: 20),
                   _buildTextInputField(context, 'Date',
                       icon: Icons.calendar_today),
                   const SizedBox(height: 30),
-                  _buildCheckbox(), // Checkbox modificado
+                  _buildCheckbox(),
                   const SizedBox(height: 30),
                   ElevatedButton(
                     onPressed: () {
-                      // Navega a la pantalla de Datos de la Tienda
                       Navigator.pushNamed(context, '/storeDetails');
                     },
                     style: ElevatedButton.styleFrom(
@@ -60,9 +58,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       textStyle: const TextStyle(fontSize: 18),
                     ),
                     child: const Text('Sign Up',
-                        style: TextStyle(
-                            color: Colors
-                                .deepPurple)), // Asegúrate de que el texto sea visible con el fondo blanco
+                        style: TextStyle(color: Colors.deepPurple)),
                   )
                 ],
               ),

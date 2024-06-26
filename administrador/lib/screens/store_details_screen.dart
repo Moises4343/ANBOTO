@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart'; // Asegúrate de que el paquete está importado
+import 'package:image_picker/image_picker.dart';
 
 class StoreDetailsScreen extends StatefulWidget {
   const StoreDetailsScreen({super.key});
@@ -12,7 +12,7 @@ class StoreDetailsScreen extends StatefulWidget {
 
 class _StoreDetailsScreenState extends State<StoreDetailsScreen> {
   final ImagePicker _picker = ImagePicker();
-  XFile? _image; // Variable para almacenar la imagen seleccionada
+  XFile? _image;
 
   @override
   Widget build(BuildContext context) {
@@ -33,16 +33,14 @@ class _StoreDetailsScreenState extends State<StoreDetailsScreen> {
           child: Column(
             children: [
               GestureDetector(
-                onTap:
-                    _pickImage, // Llama a la función para seleccionar la imagen
+                onTap: _pickImage,
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(10),
                   ),
                   padding: const EdgeInsets.all(10),
-                  child: _image ==
-                          null // Muestra la imagen seleccionada o el ícono por defecto
+                  child: _image == null
                       ? const Icon(Icons.add_photo_alternate,
                           size: 50, color: Colors.deepPurple)
                       : Image.file(File(_image!.path),
@@ -87,7 +85,6 @@ class _StoreDetailsScreenState extends State<StoreDetailsScreen> {
         });
       }
     } catch (e) {
-      // Manejo de errores o mostrar una alerta si ocurre algún error
       print('Error al seleccionar la imagen: $e');
     }
   }
