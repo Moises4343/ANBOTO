@@ -4,10 +4,10 @@ class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
   @override
-  _RegisterScreenState createState() => _RegisterScreenState();
+  RegisterScreenState createState() => RegisterScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class RegisterScreenState extends State<RegisterScreen> {
   bool _isAccepted = false; // Variable para manejar el estado del checkbox
   bool _isObscured = true; // Variable para manejar si la contraseña es visible
 

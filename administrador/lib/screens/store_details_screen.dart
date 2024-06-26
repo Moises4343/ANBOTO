@@ -7,10 +7,10 @@ class StoreDetailsScreen extends StatefulWidget {
   const StoreDetailsScreen({super.key});
 
   @override
-  _StoreDetailsScreenState createState() => _StoreDetailsScreenState();
+  StoreDetailsScreenState createState() => StoreDetailsScreenState();
 }
 
-class _StoreDetailsScreenState extends State<StoreDetailsScreen> {
+class StoreDetailsScreenState extends State<StoreDetailsScreen> {
   final ImagePicker _picker = ImagePicker();
   XFile? _image; // Variable para almacenar la imagen seleccionada
 
