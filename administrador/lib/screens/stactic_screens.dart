@@ -1,3 +1,4 @@
+import 'package:administrador/screens/home_screens.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
 
@@ -353,10 +354,10 @@ class StatisticsScreens extends StatelessWidget {
                     IconButton(
                       icon: const Icon(Icons.grid_view),
                       onPressed: () {
-                        /* Navigator.push(
+                        Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Home()),
-                        ); */
+                          MaterialPageRoute(builder: (context) => HomeScreens(key: key,)),
+                        );
                       },
                     ),
                     IconButton(
