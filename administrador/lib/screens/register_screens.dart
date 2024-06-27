@@ -4,10 +4,10 @@ class RegisterScreens extends StatefulWidget {
   const RegisterScreens({super.key});
 
   @override
-  _RegisterScreensState createState() => _RegisterScreensState();
+  RegisterScreensState createState() => RegisterScreensState();
 }
 
-class _RegisterScreensState extends State<RegisterScreens> {
+class RegisterScreensState extends State<RegisterScreens> {
   bool _isAccepted = false;
   bool _isObscured = true;
 
