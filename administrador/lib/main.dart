@@ -1,28 +1,19 @@
+import 'package:administrador/pages/login.dart';
 import 'package:flutter/material.dart';
 
-import './screens/register_screen.dart';
-import './screens/store_details_screen.dart';
-
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Administrador',
-      theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const RegisterScreen(),
-        '/storeDetails': (context) => const StoreDetailsScreen(),
-      },
+      debugShowCheckedModeBanner: false,
+      home: MiPantalla(),
     );
   }
 }
