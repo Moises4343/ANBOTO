@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class RegisterScreen extends StatefulWidget {
-  const RegisterScreen({super.key});
+class RegisterScreens extends StatefulWidget {
+  const RegisterScreens({super.key});
 
   @override
-  _RegisterScreenState createState() => _RegisterScreenState();
+  _RegisterScreensState createState() => _RegisterScreensState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _RegisterScreensState extends State<RegisterScreens> {
   bool _isAccepted = false;
   bool _isObscured = true;
 
