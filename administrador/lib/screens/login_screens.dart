@@ -3,12 +3,13 @@ import 'package:administrador/screens/planes_screens.dart';
 import 'package:administrador/screens/stactic_screens.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class LoginScreens extends StatelessWidget {
+  const LoginScreens({super.key});
 
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+
     double screenHeight = screenSize.height;
     return Scaffold(
       body: Stack(
@@ -69,7 +70,18 @@ class LoginScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Expanded(
+                      ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.grey,
+                        ),
+                        child: const Text(
+                          'Press me',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 5),
                         child: ElevatedButton(
                           onPressed: () {},
                           style: ElevatedButton.styleFrom(
@@ -81,30 +93,14 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(width: 5), // Agregar espacio entre botones
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.grey,
-                          ),
-                          child: const Text(
-                            'Press me',
-                            style: TextStyle(color: Colors.white),
-                          ),
+                      ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.grey,
                         ),
-                      ),
-                      const SizedBox(width: 5), // Agregar espacio entre botones
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.grey,
-                          ),
-                          child: const Text(
-                            'Press me',
-                            style: TextStyle(color: Colors.white),
-                          ),
+                        child: const Text(
+                          'Press me',
+                          style: TextStyle(color: Colors.white),
                         ),
                       ),
                     ],
@@ -136,13 +132,12 @@ class LoginScreen extends StatelessWidget {
                           children: [
                             Expanded(
                               child: ClipRRect(
-                                borderRadius: const BorderRadius.vertical(
-                                    top: Radius.circular(4)),
-                                child: Image.network(
-                                  'https://www.monchys.com/cdn/shop/files/Chocolate3leches_rebanada.jpg?v=1689093604&width=1946', // URL de la imagen
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
+                                  borderRadius: const BorderRadius.vertical(
+                                      top: Radius.circular(4)),
+                                  child: Image.asset(
+                                    'assets/chocolate.webp',
+                                    fit: BoxFit.cover,
+                                  )),
                             ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -191,8 +186,10 @@ class LoginScreen extends StatelessWidget {
                   IconButton(
                     icon: const Icon(Icons.grid_view),
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => HomeScreens(key: key)));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const HomeScreens()));
                     },
                   ),
                   IconButton(
@@ -202,15 +199,19 @@ class LoginScreen extends StatelessWidget {
                   IconButton(
                     icon: const Icon(Icons.settings),
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => StatisticsScreens(key: key,)));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const StatisticsScreens()));
                     },
                   ),
                   IconButton(
                     icon: const Icon(Icons.person),
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => PlanesScreens(key: key,)));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const PlanesScreens()));
                     },
                   ),
                 ],
