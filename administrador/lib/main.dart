@@ -1,4 +1,8 @@
-import 'package:administrador/screens/login_screens.dart';
+
+import 'package:administrador/navegation/botton_nav_bar.dart';
+
+
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,11 +15,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginScreens(
-        key: key,
-      ),
+      home: BottomNavBar(),
     );
   }
 }
+
