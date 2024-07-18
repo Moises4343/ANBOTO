@@ -1,9 +1,7 @@
 import 'package:administrador/screens/login_screens.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreens extends StatelessWidget {
-  const HomeScreens({super.key});
-
+class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,28 +41,16 @@ class HomeScreens extends StatelessWidget {
                   children: [
                     Column(
                       children: [
-                        _buildCard(
-                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaDhNdZIB_wdGKA0xLGWlwC1tdt5ZzjZIcgP9z6_3zuqc9_BzJKZ3PDLwMOVZSBH-We1k&usqp=CAU',
-                            "Mi recibo"),
-                        _buildCard(
-                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRovXEDFjIrjjzujDfwO99Nnj5eSzVxHx0fAg&s',
-                            "Total de Ordenes"),
-                        _buildCard(
-                            'https://w7.pngwing.com/pngs/145/382/png-transparent-chart-graph-database-computer-icons-statistics-graph-of-a-function-pratique-angle-text-graph-of-a-function.png',
-                            "Estadistica"),
+                        _buildCard('assets/dinero.jpeg', "Mi recibo"),
+                        _buildCard('assets/box.jpeg', "Total de Ordenes"),
+                        _buildCard('assets/estadisticas.jpeg', "Estadistica"),
                       ],
                     ),
                     Column(
                       children: [
-                        _buildCard(
-                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPsZlmVRr_Angyha6aDbOrIPb_pv1smplOU_ZxJf-9m-hU90sH9CKjq8nn7RmQps0yacc&usqp=CAU',
-                            "Help"),
-                        _buildCard(
-                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDs_421_GWlw2SPfOja0-Df6mOWFSOjmLwjg&s',
-                            "Catalogo"),
-                        _buildCard(
-                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtMMRK9NEDcJiFQeXzQ7NT4KsfqvyQ3A9HYg&s',
-                            "Transacciones"),
+                        _buildCard('assets/help.jpeg', "Help"),
+                        _buildCard('assets/book.jpeg', "Catalogo"),
+                        _buildCard('assets/buy.jpeg', "Transacciones"),
                       ],
                     ),
                   ],
@@ -89,12 +75,8 @@ class HomeScreens extends StatelessWidget {
                   IconButton(
                     icon: const Icon(Icons.grid_view),
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => HomeScreens(
-                                    key: key,
-                                  )));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Home()));
                     },
                   ),
                   IconButton(
@@ -103,7 +85,7 @@ class HomeScreens extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const LoginScreens()));
+                              builder: (context) => const MiPantalla()));
                     },
                   ),
                   IconButton(
@@ -129,7 +111,7 @@ class HomeScreens extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.network(
+          Image.asset(
             imageUrl,
             fit: BoxFit.cover,
             width: 120.0,

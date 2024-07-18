@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   image_picker: ^1.1.2
+  http: ^0.13.3
 
 dev_dependencies:
   flutter_test:
@@ -19,4 +20,16 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-  - assets/chocolate.webp
+    - assets/descarga.jpg
+    - assets/google_logo.png
+    - assets/facebook_logo.png
+    - assets/apple_logo.png
+    - assets/app_logo.jpeg
+    - assets/book.jpeg
+    - assets/buy.jpeg
+    - assets/dinero.jpeg
+    - assets/estadisticas.jpeg
+    - assets/help.jpeg
+    - assets/box.jpeg
+
+  

@@ -1,16 +1,18 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:administrador/screens/home_screens.dart';
-import 'package:administrador/screens/planes_screens.dart';
-import 'package:administrador/screens/stactic_screens.dart';
+import 'package:administrador/screens/register_screens.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreens extends StatelessWidget {
-  const LoginScreens({super.key});
+class MiPantalla extends StatelessWidget {
+  const MiPantalla({super.key});
 
   @override
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
-
+    double screenWidth = screenSize.width;
     double screenHeight = screenSize.height;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -30,189 +32,176 @@ class LoginScreens extends StatelessWidget {
               ),
             ),
           ),
-          // Contenido de la pantalla
-          Column(
-            children: [
-              // Espacio arriba (puede ser un SizedBox)
-              const SizedBox(height: 40),
-              // Input con icono de búsqueda
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: const TextField(
-                          decoration: InputDecoration(
-                            hintText: 'Buscar...',
-                            border: InputBorder.none,
-                            icon: Icon(Icons.search),
-                          ),
-                        ),
-                      ),
+          Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(30.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    width: screenWidth * 0.9,
+                    padding: const EdgeInsets.all(20.0),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(50),
                     ),
-                    const SizedBox(width: 16),
-                    // Icono de más para agregar
-                    const Icon(Icons.add, color: Colors.white, size: 30),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: SizedBox(
-                  height: screenHeight * 0.1,
-                  width: double.infinity,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.grey,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Container(
+                          height: screenHeight * 0.2,
+                          child: Image.asset('assets/app_logo.jpeg'),
                         ),
-                        child: const Text(
-                          'Press me',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 5),
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.grey,
-                          ),
-                          child: const Text(
-                            'Press me',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ),
-                      ),
-                      ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.grey,
-                        ),
-                        child: const Text(
-                          'Press me',
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              // Cards de imágenes y texto en formato de tablero (GridView)
-              Expanded(
-                child: GridView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3, // Número de columnas en el tablero
-                    crossAxisSpacing:
-                        10.0, // Espacio horizontal entre elementos
-                    mainAxisSpacing: 10.0, // Espacio vertical entre elementos
-                    childAspectRatio:
-                        1.2, // Relación entre ancho y alto de cada card
-                  ),
-                  itemCount:
-                      6, // Número de elementos (puedes ajustar según necesites)
-                  itemBuilder: (context, index) {
-                    return SizedBox(
-                      width: 100,
-                      height: 100,
-                      child: Card(
-                        elevation: 3,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Expanded(
-                              child: ClipRRect(
-                                  borderRadius: const BorderRadius.vertical(
-                                      top: Radius.circular(4)),
-                                  child: Image.asset(
-                                    'assets/chocolate.webp',
-                                    fit: BoxFit.cover,
-                                  )),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('Card $index',
-                                      style: const TextStyle(
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.bold)),
-                                  const SizedBox(height: 2),
-                                  Text('Descripción de la card $index',
-                                      style: const TextStyle(fontSize: 10)),
-                                ],
+                        const SizedBox(height: 20),
+                        TextField(
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            hintText: 'Email',
+                            hintStyle: const TextStyle(
+                                color: Color.fromARGB(255, 0, 0, 0)),
+                            prefixIcon: const Icon(Icons.email,
+                                color: Color.fromARGB(255, 0, 0, 0)),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(50),
+                              borderSide: const BorderSide(
+                                color: Color(0xFF9B6198),
+                                width: 2,
                               ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: const BorderSide(
+                                color: Color(0xFF9B6198),
+                                width: 2,
+                              ),
+                            ),
+                          ),
+                          style: const TextStyle(color: Colors.black),
+                        ),
+                        const SizedBox(height: 20),
+                        TextField(
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            hintText: 'Password',
+                            hintStyle: const TextStyle(
+                                color: Color.fromARGB(255, 0, 0, 0)),
+                            prefixIcon: const Icon(Icons.password,
+                                color: Color.fromARGB(255, 0, 0, 0)),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(50),
+                              borderSide: const BorderSide(
+                                color: Color(0xFF9B6198),
+                                width: 2,
+                              ),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: const BorderSide(
+                                color: Color(0xFF9B6198),
+                                width: 2,
+                              ),
+                            ),
+                          ),
+                          style: const TextStyle(color: Colors.black),
+                        ),
+                        const SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Checkbox(
+                                  value: false,
+                                  onChanged: (bool? value) {},
+                                ),
+                                const Text(
+                                  'Remember me',
+                                  style: TextStyle(color: Colors.black),
+                                ),
+                              ],
+                            ),
+                            const Text(
+                              'forgot password',
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 90, 156, 255)),
                             ),
                           ],
                         ),
+                        const SizedBox(height: 20),
+                        Container(
+                          width: double.infinity,
+                          height: 50,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Home()));
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(
+                                  0xFF4E304C), // background (button) color
+                            ),
+                            child: const Text('Sign ln',
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 255, 255, 255))),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  // Logos de Google, Facebook y Apple
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: Colors.white,
+                        radius: 20,
+                        child: Image.asset('assets/google_logo.png'),
                       ),
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-          // Barra de navegación como pie de página
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              height: 60,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    blurRadius: 6,
-                    offset: const Offset(0, -3),
+                      const SizedBox(width: 10),
+                      CircleAvatar(
+                        backgroundColor: Colors.white,
+                        radius: 20,
+                        child: Image.asset('assets/facebook_logo.png'),
+                      ),
+                      const SizedBox(width: 10),
+                      CircleAvatar(
+                        backgroundColor: Colors.white,
+                        radius: 20,
+                        child: Image.asset('assets/apple_logo.png'),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  IconButton(
-                    icon: const Icon(Icons.grid_view),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const HomeScreens()));
-                    },
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.crop_din_rounded),
-                    onPressed: () {},
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.settings),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const StatisticsScreens()));
-                    },
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.person),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const PlanesScreens()));
-                    },
+                  const SizedBox(height: 20),
+                  // Texto debajo de los logos
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Dont have an?',
+                        style: TextStyle(fontSize: 16, color: Colors.blue),
+                      ),
+                      SizedBox(width: 5),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Registro()));
+                        },
+                        child: const Text(
+                          'Sign up here',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Color.fromARGB(255, 255, 255, 255),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
