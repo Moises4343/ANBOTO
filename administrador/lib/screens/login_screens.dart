@@ -191,7 +191,7 @@ class MiPantalla extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Registro()));
+                                  builder: (context) => RegisterScreens(key: key,)));
                         },
                         child: const Text(
                           'Sign up here',

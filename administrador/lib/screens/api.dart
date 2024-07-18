@@ -2,6 +2,8 @@ import 'package:administrador/services/api_services.dart'; // Asegúrate de incl
 import 'package:flutter/material.dart';
 
 class Registro extends StatefulWidget {
+  const Registro({super.key});
+
   @override
   _RegistroState createState() => _RegistroState();
 }

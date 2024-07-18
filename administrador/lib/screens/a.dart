@@ -2,6 +2,8 @@ import 'package:administrador/screens/login_screens.dart';
 import 'package:flutter/material.dart';
 
 class Registro extends StatelessWidget {
+  const Registro({super.key});
+
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -329,7 +331,7 @@ class Registro extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => MiPantalla()),
+                          MaterialPageRoute(builder: (context) => LoginScreens(key: key,)),
                         );
                       },
                       style: ElevatedButton.styleFrom(
