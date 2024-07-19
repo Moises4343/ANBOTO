@@ -71,4 +71,30 @@ class ApiService {
       throw Exception('Failed to process request: ${response.statusCode}');
     }
   }
+
+  // Login method
+  Future<bool> login(String email, String password, String id) async {
+    try {
+      final response = await http.post(
+        Uri.parse(
+            '${baseUrl}usuario_admin/id'), // Ajusta esto según la ruta correcta de tu API
+        headers: {'Content-Type': 'application/json'},
+        body: json.encode({
+          'email': email,
+          'password': password,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        // Aquí puedes manejar la lógica post-login, como guardar tokens, etc.
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      // Manejo de errores de conexión o de otro tipo
+      print('Error during login: $e');
+      return false;
+    }
+  }
 }

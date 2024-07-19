@@ -1,67 +1,11 @@
-// ignore_for_file: use_build_context_synchronously
-
-import 'dart:convert';
+// ignore_for_file: sized_box_for_whitespace
 
 import 'package:administrador/screens/home_screens.dart';
 import 'package:administrador/screens/register_screens.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
-class MiPantalla extends StatefulWidget {
-  const MiPantalla({Key? key}) : super(key: key);
-
-  @override
-  _MiPantallaState createState() => _MiPantallaState();
-}
-
-class _MiPantallaState extends State<MiPantalla> {
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController passwordController = TextEditingController();
-  bool isLoading = false;
-
-  Future<void> login() async {
-    setState(() {
-      isLoading = true;
-    });
-
-    var url = Uri.parse(
-        'https://anboto-back-production.up.railway.app/api/usuario_admin/login');
-    var response = await http.post(
-      url,
-      headers: {'Content-Type': 'application/json'},
-      body: json.encode({
-        'email': emailController.text,
-        'password': passwordController.text,
-      }),
-    );
-
-    if (response.statusCode == 200) {
-      var data = json.decode(response.body);
-
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (_) => Home()));
-    } else {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: const Text('Login Failed'),
-          content: const Text('Invalid email or password. Please try again.'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('OK'),
-            ),
-          ],
-        ),
-      );
-    }
-
-    setState(() {
-      isLoading = false;
-    });
-  }
+class MiPantalla extends StatelessWidget {
+  const MiPantalla({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -72,6 +16,7 @@ class _MiPantallaState extends State<MiPantalla> {
     return Scaffold(
       body: Stack(
         children: [
+          // Fondo con gradiente lineal
           Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
@@ -109,47 +54,56 @@ class _MiPantallaState extends State<MiPantalla> {
                         ),
                         const SizedBox(height: 20),
                         TextField(
-                          controller: emailController,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
                             hintText: 'Email',
+                            hintStyle: const TextStyle(
+                                color: Color.fromARGB(255, 0, 0, 0)),
                             prefixIcon: const Icon(Icons.email,
                                 color: Color.fromARGB(255, 0, 0, 0)),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(50),
                               borderSide: const BorderSide(
-                                  color: Color(0xFF9B6198), width: 2),
+                                color: Color(0xFF9B6198),
+                                width: 2,
+                              ),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: const BorderSide(
-                                  color: Color(0xFF9B6198), width: 2),
+                                color: Color(0xFF9B6198),
+                                width: 2,
+                              ),
                             ),
                           ),
                           style: const TextStyle(color: Colors.black),
                         ),
                         const SizedBox(height: 20),
                         TextField(
-                          controller: passwordController,
                           decoration: InputDecoration(
                             filled: true,
                             fillColor: Colors.white,
                             hintText: 'Password',
+                            hintStyle: const TextStyle(
+                                color: Color.fromARGB(255, 0, 0, 0)),
                             prefixIcon: const Icon(Icons.password,
                                 color: Color.fromARGB(255, 0, 0, 0)),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(50),
                               borderSide: const BorderSide(
-                                  color: Color(0xFF9B6198), width: 2),
+                                color: Color(0xFF9B6198),
+                                width: 2,
+                              ),
                             ),
                             focusedBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10),
                               borderSide: const BorderSide(
-                                  color: Color(0xFF9B6198), width: 2),
+                                color: Color(0xFF9B6198),
+                                width: 2,
+                              ),
                             ),
                           ),
-                          obscureText: true,
                           style: const TextStyle(color: Colors.black),
                         ),
                         const SizedBox(height: 20),
@@ -162,13 +116,17 @@ class _MiPantallaState extends State<MiPantalla> {
                                   value: false,
                                   onChanged: (bool? value) {},
                                 ),
-                                const Text('Remember me',
-                                    style: TextStyle(color: Colors.black)),
+                                const Text(
+                                  'Remember me',
+                                  style: TextStyle(color: Colors.black),
+                                ),
                               ],
                             ),
-                            const Text('Forgot password',
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 90, 156, 255))),
+                            const Text(
+                              'forgot password',
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 90, 156, 255)),
+                            ),
                           ],
                         ),
                         const SizedBox(height: 20),
@@ -176,23 +134,26 @@ class _MiPantallaState extends State<MiPantalla> {
                           width: double.infinity,
                           height: 50,
                           child: ElevatedButton(
-                            onPressed: isLoading ? null : login,
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Home()));
+                            },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF4E304C),
+                              backgroundColor: const Color(
+                                  0xFF4E304C), // background (button) color
                             ),
-                            child: isLoading
-                                ? const CircularProgressIndicator(
-                                    color: Colors.white)
-                                : const Text('Sign In',
-                                    style: TextStyle(
-                                        color: Color.fromARGB(
-                                            255, 255, 255, 255))),
+                            child: const Text('Sign ln',
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 255, 255, 255))),
                           ),
                         ),
                       ],
                     ),
                   ),
                   const SizedBox(height: 20),
+                  // Logos de Google, Facebook y Apple
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -216,11 +177,15 @@ class _MiPantallaState extends State<MiPantalla> {
                     ],
                   ),
                   const SizedBox(height: 20),
+                  // Texto debajo de los logos
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('Dont have an account?',
-                          style: TextStyle(fontSize: 16, color: Colors.blue)),
+                      const Text(
+                        'Dont have an?',
+                        style: TextStyle(fontSize: 16, color: Colors.blue),
+                      ),
+                      SizedBox(width: 5),
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -228,10 +193,13 @@ class _MiPantallaState extends State<MiPantalla> {
                               MaterialPageRoute(
                                   builder: (context) => Registro()));
                         },
-                        child: const Text('Sign up here',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Color.fromARGB(255, 255, 255, 255))),
+                        child: const Text(
+                          'Sign up here',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Color.fromARGB(255, 255, 255, 255),
+                          ),
+                        ),
                       ),
                     ],
                   ),
