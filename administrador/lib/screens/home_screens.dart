@@ -1,7 +1,9 @@
 import 'package:administrador/screens/login_screens.dart';
 import 'package:flutter/material.dart';
 
-class Home extends StatelessWidget {
+class HomeScreens extends StatelessWidget {
+  const HomeScreens({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,7 +78,7 @@ class Home extends StatelessWidget {
                     icon: const Icon(Icons.grid_view),
                     onPressed: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Home()));
+                          MaterialPageRoute(builder: (context) => HomeScreens(key: key,)));
                     },
                   ),
                   IconButton(
@@ -85,7 +87,7 @@ class Home extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => MiPantalla()));
+                              builder: (context) => LoginScreens(key: key,)));
                     },
                   ),
                   IconButton(

@@ -117,7 +117,7 @@ class _RegistroState extends State<RegisterScreens> {
                         Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: screenWidth * 0.05),
-                          child: Container(
+                          child: SizedBox(
                             width: double.infinity,
                             height: 50,
                             child: ElevatedButton(
@@ -150,7 +150,7 @@ class _RegistroState extends State<RegisterScreens> {
 class TextFieldLabel extends StatelessWidget {
   final String label;
 
-  const TextFieldLabel({Key? key, required this.label}) : super(key: key);
+  const TextFieldLabel({super.key, required this.label});
 
   @override
   Widget build(BuildContext context) {
@@ -168,7 +168,7 @@ class TextFieldLabel extends StatelessWidget {
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
 
-  const CustomTextField({Key? key, required this.controller}) : super(key: key);
+  const CustomTextField({super.key, required this.controller});
 
   @override
   Widget build(BuildContext context) {

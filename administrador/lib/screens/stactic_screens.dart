@@ -140,12 +140,12 @@ class StacticScreens extends StatelessWidget {
                               children: [
                                 Padding(
                                   padding:
-                                      EdgeInsets.symmetric(horizontal: 40.0),
+                                     const EdgeInsets.symmetric(horizontal: 40.0),
                                   child: Container(
                                     width: 300,
                                     height:
                                         100, // Altura del contenedor principal (ajústalo según sea necesario)
-                                    padding: EdgeInsets.all(16),
+                                    padding: const EdgeInsets.all(16),
                                     decoration: BoxDecoration(
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(
@@ -232,7 +232,7 @@ class StacticScreens extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                          child: Container(
+                          child: SizedBox(
                             height: 100, // Altura de la gráfica de barras
                             width: double.infinity,
                             child: CustomPaint(
@@ -366,7 +366,7 @@ class StacticScreens extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 40.0),
-                          child: Container(
+                          child: SizedBox(
                             height: 100, // Altura de la gráfica de barras
                             width: double.infinity,
                             child: CustomPaint(
@@ -407,7 +407,7 @@ class StacticScreens extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Home()),
+                          MaterialPageRoute(builder: (context) => HomeScreens(key: key,)),
                         );
                       },
                     ),
@@ -416,7 +416,7 @@ class StacticScreens extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => MiPantalla()),
+                          MaterialPageRoute(builder: (context) => LoginScreens(key: key,)),
                         );
                       },
                     ),
@@ -493,8 +493,8 @@ class BarChartPainter extends CustomPainter {
         TextPainter textPainter = TextPainter(
           text: TextSpan(
             text: labels[i],
-            style: TextStyle(
-                color: const Color.fromARGB(255, 255, 255, 255), fontSize: 12),
+            style: const TextStyle(
+                color:  Color.fromARGB(255, 255, 255, 255), fontSize: 12),
           ),
           textDirection: TextDirection.ltr,
           textAlign: TextAlign.center,
