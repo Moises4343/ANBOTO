@@ -4,7 +4,9 @@ import 'package:administrador/screens/home_screens.dart';
 import 'package:administrador/screens/login_screens.dart';
 import 'package:flutter/material.dart';
 
-class estadistica extends StatelessWidget {
+class StacticScreens extends StatelessWidget {
+  const StacticScreens({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -162,15 +164,16 @@ class estadistica extends StatelessWidget {
                                             Container(
                                               width: 50,
                                               height: 50,
-                                              decoration: BoxDecoration(
+                                              decoration: const BoxDecoration(
                                                 color: Colors.green,
                                                 shape: BoxShape.circle,
                                               ),
-                                              child: Icon(Icons.arrow_downward,
+                                              child: const Icon(
+                                                  Icons.arrow_downward,
                                                   color: Colors.white),
                                             ),
-                                            SizedBox(width: 12),
-                                            Column(
+                                            const SizedBox(width: 12),
+                                            const Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
@@ -187,7 +190,7 @@ class estadistica extends StatelessWidget {
                                                 ),
                                               ],
                                             ),
-                                            SizedBox(width: 12),
+                                            const SizedBox(width: 12),
                                             Container(
                                               width: 50,
                                               height: 50,
@@ -228,7 +231,7 @@ class estadistica extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 40.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 40.0),
                           child: Container(
                             height: 100, // Altura de la gráfica de barras
                             width: double.infinity,
@@ -270,13 +273,13 @@ class estadistica extends StatelessWidget {
                             child: Row(
                               children: [
                                 Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 40.0),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 40.0),
                                   child: Container(
                                     width: 300,
                                     height:
                                         100, // Altura del contenedor principal (ajústalo según sea necesario)
-                                    padding: EdgeInsets.all(16),
+                                    padding: const EdgeInsets.all(16),
                                     decoration: BoxDecoration(
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(
@@ -295,15 +298,16 @@ class estadistica extends StatelessWidget {
                                             Container(
                                               width: 50,
                                               height: 50,
-                                              decoration: BoxDecoration(
+                                              decoration: const BoxDecoration(
                                                 color: Colors.green,
                                                 shape: BoxShape.circle,
                                               ),
-                                              child: Icon(Icons.arrow_downward,
+                                              child: const Icon(
+                                                  Icons.arrow_downward,
                                                   color: Colors.white),
                                             ),
-                                            SizedBox(width: 12),
-                                            Column(
+                                            const SizedBox(width: 12),
+                                            const Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
@@ -320,7 +324,7 @@ class estadistica extends StatelessWidget {
                                                 ),
                                               ],
                                             ),
-                                            SizedBox(width: 12),
+                                            const SizedBox(width: 12),
                                             Container(
                                               width: 50,
                                               height: 50,
@@ -361,7 +365,7 @@ class estadistica extends StatelessWidget {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 40.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 40.0),
                           child: Container(
                             height: 100, // Altura de la gráfica de barras
                             width: double.infinity,
@@ -391,7 +395,7 @@ class estadistica extends StatelessWidget {
                     BoxShadow(
                       color: Colors.black.withOpacity(0.2),
                       blurRadius: 6,
-                      offset: Offset(0, -3),
+                      offset: const Offset(0, -3),
                     ),
                   ],
                 ),
@@ -399,7 +403,7 @@ class estadistica extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     IconButton(
-                      icon: Icon(Icons.grid_view),
+                      icon: const Icon(Icons.grid_view),
                       onPressed: () {
                         Navigator.push(
                           context,
@@ -408,7 +412,7 @@ class estadistica extends StatelessWidget {
                       },
                     ),
                     IconButton(
-                      icon: Icon(Icons.crop_din_rounded),
+                      icon: const Icon(Icons.crop_din_rounded),
                       onPressed: () {
                         Navigator.push(
                           context,
@@ -417,11 +421,11 @@ class estadistica extends StatelessWidget {
                       },
                     ),
                     IconButton(
-                      icon: Icon(Icons.settings),
+                      icon: const Icon(Icons.settings),
                       onPressed: () {},
                     ),
                     IconButton(
-                      icon: Icon(Icons.person),
+                      icon: const Icon(Icons.person),
                       onPressed: () {},
                     ),
                   ],
@@ -489,7 +493,8 @@ class BarChartPainter extends CustomPainter {
         TextPainter textPainter = TextPainter(
           text: TextSpan(
             text: labels[i],
-            style: TextStyle(color: Colors.black, fontSize: 12),
+            style: TextStyle(
+                color: const Color.fromARGB(255, 255, 255, 255), fontSize: 12),
           ),
           textDirection: TextDirection.ltr,
           textAlign: TextAlign.center,

@@ -226,7 +226,8 @@ class _MiPantallaState extends State<MiPantalla> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Registro()));
+                                  builder: (context) =>
+                                      const RegisterScreens()));
                         },
                         child: const Text('Sign up here',
                             style: TextStyle(

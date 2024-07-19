@@ -2,6 +2,8 @@ import 'package:administrador/screens/payment_screens.dart';
 import 'package:flutter/material.dart';
 
 class CustomGradientBackground extends StatelessWidget {
+  const CustomGradientBackground({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -240,7 +242,7 @@ class CustomGradientBackground extends StatelessWidget {
                 ),
                 onPressed: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => pays()));
+                      context, MaterialPageRoute(builder: (context) => PaymentScreens(key: key,)));
                 },
                 child: const Text('Siguiente'),
               ),

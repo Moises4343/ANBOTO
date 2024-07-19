@@ -1,12 +1,14 @@
 import 'package:administrador/services/api_services.dart'; // Asegúrate de incluir tu servicio ApiService aquí
 import 'package:flutter/material.dart';
 
-class Registro extends StatefulWidget {
+class RegisterScreens extends StatefulWidget {
+  const RegisterScreens({super.key});
+
   @override
   _RegistroState createState() => _RegistroState();
 }
 
-class _RegistroState extends State<Registro> {
+class _RegistroState extends State<RegisterScreens> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _numberController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();

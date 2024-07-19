@@ -85,7 +85,7 @@ class Home extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const MiPantalla()));
+                              builder: (context) => MiPantalla()));
                     },
                   ),
                   IconButton(
