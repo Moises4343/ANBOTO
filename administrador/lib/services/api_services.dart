@@ -3,7 +3,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ApiService {
-  final String baseUrl = "https://anboto-back-production.up.railway.app/api/";
+  final String baseUrl =
+      "https://anboto-back-production-9c3a.up.railway.app/api/";
 
   // Fetch all users
   Future<dynamic> getAllUsuariosAdmin() async {
@@ -29,6 +30,57 @@ class ApiService {
   // Delete user
   Future<dynamic> deleteUsuarioAdmin(String id) async {
     return deleteData('usuario_admin/$id');
+  }
+
+  // Fetch all store data
+  Future<dynamic> getAllDatosTienda() async {
+    return fetchData('datos_tienda');
+  }
+
+  // Fetch single store data by ID
+  Future<dynamic> getDatosTiendaById(String id) async {
+    return fetchData('datos_tienda/$id');
+  }
+
+  // Create new store data
+  Future<dynamic> createDatosTienda(Map<String, dynamic> data) async {
+    return postData('datos_tienda', data);
+  }
+
+  // Update store data
+  Future<dynamic> updateDatosTienda(
+      String id, Map<String, dynamic> data) async {
+    return putData('datos_tienda/$id', data);
+  }
+
+  // Delete store data
+  Future<dynamic> deleteDatosTienda(String id) async {
+    return deleteData('datos_tienda/$id');
+  }
+
+  // Fetch all products
+  Future<dynamic> getAllProductos() async {
+    return fetchData('producto');
+  }
+
+  // Fetch single product by ID
+  Future<dynamic> getProductoById(String id) async {
+    return fetchData('producto/$id');
+  }
+
+  // Create new product
+  Future<dynamic> createProducto(Map<String, dynamic> data) async {
+    return postData('producto', data);
+  }
+
+  // Update existing product
+  Future<dynamic> updateProducto(String id, Map<String, dynamic> data) async {
+    return putData('producto/$id', data);
+  }
+
+  // Delete product
+  Future<dynamic> deleteProducto(String id) async {
+    return deleteData('producto/$id');
   }
 
   // Generic fetch data method
@@ -73,11 +125,10 @@ class ApiService {
   }
 
   // Login method
-  Future<bool> login(String email, String password, String id) async {
+  Future<bool> login(String email, String password) async {
     try {
       final response = await http.post(
-        Uri.parse(
-            '${baseUrl}usuario_admin/id'), // Ajusta esto según la ruta correcta de tu API
+        Uri.parse('${baseUrl}usuario_admin/login'),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
           'email': email,

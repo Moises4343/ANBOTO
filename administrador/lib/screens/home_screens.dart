@@ -1,4 +1,6 @@
 import 'package:administrador/screens/login_screens.dart';
+import 'package:administrador/screens/new_product_screens.dart';
+import 'package:administrador/screens/store_details_screens.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
@@ -41,16 +43,26 @@ class Home extends StatelessWidget {
                   children: [
                     Column(
                       children: [
-                        _buildCard('assets/dinero.jpeg', "Mi recibo"),
-                        _buildCard('assets/box.jpeg', "Total de Ordenes"),
-                        _buildCard('assets/estadisticas.jpeg', "Estadistica"),
+                        _buildCard(
+                            context, 'assets/dinero.jpeg', "Mi recibo", () {}),
+                        _buildCard(context, 'assets/box.jpeg',
+                            "Total de Ordenes", () {}),
+                        _buildCard(context, 'assets/estadisticas.jpeg',
+                            "Estadistica", () {}),
                       ],
                     ),
                     Column(
                       children: [
-                        _buildCard('assets/help.jpeg', "Help"),
-                        _buildCard('assets/book.jpeg', "Catalogo"),
-                        _buildCard('assets/buy.jpeg', "Transacciones"),
+                        _buildCard(context, 'assets/help.jpeg', "Help", () {}),
+                        _buildCard(context, 'assets/book.jpeg', "Catalogo", () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProductPage()),
+                          );
+                        }),
+                        _buildCard(
+                            context, 'assets/buy.jpeg', "Transacciones", () {}),
                       ],
                     ),
                   ],
@@ -90,7 +102,12 @@ class Home extends StatelessWidget {
                   ),
                   IconButton(
                     icon: const Icon(Icons.settings),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => StoreDetailsScreen()));
+                    },
                   ),
                   IconButton(
                     icon: const Icon(Icons.person),
@@ -105,28 +122,32 @@ class Home extends StatelessWidget {
     );
   }
 
-  Widget _buildCard(String imageUrl, texto) {
+  Widget _buildCard(
+      BuildContext context, String imageUrl, String texto, VoidCallback onTap) {
     return Card(
       margin: const EdgeInsets.all(10.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            imageUrl,
-            fit: BoxFit.cover,
-            width: 120.0,
-            height: 120.0,
-          ),
-          const SizedBox(height: 10.0), // Espacio entre la imagen y el texto
-          Text(
-            '$texto',
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 16.0,
-              fontWeight: FontWeight.bold,
+      child: InkWell(
+        onTap: onTap,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              imageUrl,
+              fit: BoxFit.cover,
+              width: 120.0,
+              height: 120.0,
             ),
-          ),
-        ],
+            const SizedBox(height: 10.0), // Espacio entre la imagen y el texto
+            Text(
+              texto,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
