@@ -1,9 +1,7 @@
-import 'dart:convert';
+// ignore_for_file: library_private_types_in_public_api
 
 import 'package:administrador/services/api_services.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'package:image_picker/image_picker.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
@@ -15,8 +13,6 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   int _selectedIndex = 0;
   final ApiService _apiService = ApiService();
-  final ImagePicker _picker = ImagePicker();
-  XFile? _image;
 
   final TextEditingController _nombreController = TextEditingController();
   final TextEditingController _precioController = TextEditingController();
@@ -24,7 +20,6 @@ class _ProductPageState extends State<ProductPage> {
   final TextEditingController _categoriaController = TextEditingController();
   final TextEditingController _descripcionController = TextEditingController();
   final TextEditingController _cantidadController = TextEditingController();
-
   List<dynamic> _productos = [];
   bool _isLoading = false;
   int? _editingProductId;
@@ -33,12 +28,6 @@ class _ProductPageState extends State<ProductPage> {
   void initState() {
     super.initState();
     _fetchProductos();
-  }
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
   }
 
   Future<void> _fetchProductos() async {
@@ -60,28 +49,20 @@ class _ProductPageState extends State<ProductPage> {
     }
   }
 
-  void _loadProductData(Map<String, dynamic> product) {
-    _nombreController.text = product['nombre_producto'];
-    _precioController.text = product['precio'];
-    _promocionController.text = product['precio_promocion'];
-    _categoriaController.text = product['categoria'];
-    _descripcionController.text = product['descripcion'];
-    _cantidadController.text = product['cantidad'];
-    _editingProductId = product['id'];
+  void _loadProductData(Map<String, dynamic> producto) {
+    _nombreController.text = producto['nombre_producto'];
+    _precioController.text = producto['precio'].toString();
+    _promocionController.text = producto['precio_promocion']?.toString() ?? '';
+    _categoriaController.text = producto['categoria'] ?? '';
+    _descripcionController.text = producto['descripcion'] ?? '';
+    _cantidadController.text = producto['cantidad']?.toString() ?? '';
+    _editingProductId = producto['id_producto'];
   }
 
-  Future<void> _pickImage() async {
-    try {
-      final XFile? selectedImage =
-          await _picker.pickImage(source: ImageSource.gallery);
-      if (selectedImage != null) {
-        setState(() {
-          _image = selectedImage;
-        });
-      }
-    } catch (e) {
-      print('Error al seleccionar la imagen: $e');
-    }
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 
   Future<void> _submitForm() async {
@@ -106,39 +87,38 @@ class _ProductPageState extends State<ProductPage> {
       _isLoading = true;
     });
 
-    final url = Uri.parse(
-        'https://anboto-back-production-9c3a.up.railway.app/api/producto${_editingProductId != null ? '/$_editingProductId' : ''}');
-    final response = await (_editingProductId != null
-        ? http.put(
-            url,
-            headers: {'Content-Type': 'application/json'},
-            body: json.encode({
-              'nombre_producto': _nombreController.text,
-              'precio': _precioController.text,
-              'precio_promocion': _promocionController.text,
-              'categoria': _categoriaController.text,
-              'descripcion': _descripcionController.text,
-              'cantidad': _cantidadController.text,
-            }),
-          )
-        : http.post(
-            url,
-            headers: {'Content-Type': 'application/json'},
-            body: json.encode({
-              'nombre_producto': _nombreController.text,
-              'precio': _precioController.text,
-              'precio_promocion': _promocionController.text,
-              'categoria': _categoriaController.text,
-              'descripcion': _descripcionController.text,
-              'cantidad': _cantidadController.text,
-            }),
-          ));
+    final data = {
+      'nombre_producto': _nombreController.text,
+      'precio': _precioController.text,
+      'precio_promocion': _promocionController.text,
+      'categoria': _categoriaController.text,
+      'descripcion': _descripcionController.text,
+      'cantidad': _cantidadController.text,
+    };
 
-    if (response.statusCode == 201 || response.statusCode == 200) {
-      _fetchProductos();
-      _clearForm();
-      _editingProductId = null;
-    } else {
+    try {
+      final response = _editingProductId != null
+          ? await _apiService.updateProducto(_editingProductId.toString(), data)
+          : await _apiService.createProducto(data);
+
+      if (response != null) {
+        _fetchProductos();
+        _clearForm();
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: const Text('Éxito'),
+            content: const Text('Producto guardado correctamente.'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text('OK'),
+              ),
+            ],
+          ),
+        );
+      }
+    } catch (e) {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -159,18 +139,13 @@ class _ProductPageState extends State<ProductPage> {
     });
   }
 
-  Future<void> _deleteProducto(int? id) async {
-    if (id == null) {
-      print('Error: Producto ID es null');
-      return;
-    }
-
+  Future<void> _deleteProducto(String id) async {
     setState(() {
       _isLoading = true;
     });
 
     try {
-      await _apiService.deleteProducto(id.toString());
+      await _apiService.deleteProducto(id);
       _fetchProductos();
     } catch (e) {
       print('Error deleting product: $e');
@@ -283,10 +258,6 @@ class _ProductPageState extends State<ProductPage> {
                   ],
                 ),
               ),
-              const SizedBox(height: 20),
-              _isLoading
-                  ? const CircularProgressIndicator()
-                  : Expanded(child: _buildProductList()),
             ],
           ),
         ),
@@ -325,6 +296,10 @@ class _ProductPageState extends State<ProductPage> {
               onPressed: _submitForm,
               child: const Text('Guardar'),
             ),
+            const SizedBox(height: 20),
+            _isLoading
+                ? const CircularProgressIndicator()
+                : _buildProductList(),
           ],
         ),
       ),
@@ -365,36 +340,6 @@ class _ProductPageState extends State<ProductPage> {
     );
   }
 
-  Widget _buildProductList() {
-    return ListView.builder(
-      itemCount: _productos.length,
-      itemBuilder: (context, index) {
-        final producto = _productos[index];
-        return Card(
-          child: ListTile(
-            title: Text(producto['nombre_producto']),
-            subtitle: Text(producto['precio'] ?? ''),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.edit),
-                  onPressed: () {
-                    _loadProductData(producto);
-                  },
-                ),
-                IconButton(
-                  icon: const Icon(Icons.delete),
-                  onPressed: () => _deleteProducto(producto['id']),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
   Widget _buildTextField(String label, TextEditingController controller) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -416,6 +361,39 @@ class _ProductPageState extends State<ProductPage> {
         ),
         style: const TextStyle(color: Colors.white),
       ),
+    );
+  }
+
+  Widget _buildProductList() {
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: _productos.length,
+      itemBuilder: (context, index) {
+        final producto = _productos[index];
+        return Card(
+          child: ListTile(
+            title: Text(producto['nombre_producto']),
+            subtitle: Text(producto['precio'].toString()),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.edit),
+                  onPressed: () {
+                    _loadProductData(producto);
+                  },
+                ),
+                IconButton(
+                  icon: const Icon(Icons.delete),
+                  onPressed: () =>
+                      _deleteProducto(producto['id_producto'].toString()),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
