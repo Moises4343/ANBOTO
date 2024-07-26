@@ -6,16 +6,15 @@ import 'package:administrador/screens/home_screens.dart';
 import 'package:administrador/screens/register_screens.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:passwordfield/passwordfield.dart';
 
-class LoginScreens extends StatefulWidget {
-  const LoginScreens({super.key});
+class MiPantalla extends StatefulWidget {
+  const MiPantalla({Key? key}) : super(key: key);
 
   @override
-  _LoginScreens createState() => _LoginScreens();
+  _MiPantallaState createState() => _MiPantallaState();
 }
 
-class _LoginScreens extends State<LoginScreens> {
+class _MiPantallaState extends State<MiPantalla> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   bool isLoading = false;
@@ -40,7 +39,7 @@ class _LoginScreens extends State<LoginScreens> {
       var data = json.decode(response.body);
 
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (_) => const HomeScreens()));
+          context, MaterialPageRoute(builder: (_) => Home()));
     } else {
       showDialog(
         context: context,
@@ -69,9 +68,6 @@ class _LoginScreens extends State<LoginScreens> {
     Size screenSize = MediaQuery.of(context).size;
     double screenWidth = screenSize.width;
     double screenHeight = screenSize.height;
-
-    String err = "debe contener un carácter especial ya sea | . * @ # \$";
-    String newErr = err.replaceAll("|", "\n");
 
     return Scaffold(
       body: Stack(
@@ -134,11 +130,14 @@ class _LoginScreens extends State<LoginScreens> {
                           style: const TextStyle(color: Colors.black),
                         ),
                         const SizedBox(height: 20),
-                        PasswordField(
-                          passwordConstraint: r'.*[@$#.*].*',
-                          hintText: 'Debe tener caracteres especiales',
+                        TextField(
                           controller: passwordController,
-                          border: PasswordBorder(
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            hintText: 'Password',
+                            prefixIcon: const Icon(Icons.password,
+                                color: Color.fromARGB(255, 0, 0, 0)),
                             enabledBorder: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(50),
                               borderSide: const BorderSide(
@@ -149,13 +148,9 @@ class _LoginScreens extends State<LoginScreens> {
                               borderSide: const BorderSide(
                                   color: Color(0xFF9B6198), width: 2),
                             ),
-                            focusedErrorBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                              borderSide: const BorderSide(
-                                  color: Color(0xFF9B6198), width: 2),
-                            ),
                           ),
-                          errorMessage: newErr,
+                          obscureText: true,
+                          style: const TextStyle(color: Colors.black),
                         ),
                         const SizedBox(height: 20),
                         Row(

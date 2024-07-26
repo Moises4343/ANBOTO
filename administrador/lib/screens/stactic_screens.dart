@@ -407,7 +407,7 @@ class StacticScreens extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const HomeScreens()),
+                          MaterialPageRoute(builder: (context) => Home()),
                         );
                       },
                     ),
@@ -416,7 +416,7 @@ class StacticScreens extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const LoginScreens()),
+                          MaterialPageRoute(builder: (context) => MiPantalla()),
                         );
                       },
                     ),

@@ -1,10 +1,9 @@
 import 'package:administrador/screens/login_screens.dart';
-
+import 'package:administrador/screens/new_product_screens.dart';
+import 'package:administrador/screens/store_details_screens.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreens extends StatelessWidget {
-  const HomeScreens({super.key});
-
+class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +16,7 @@ class HomeScreens extends StatelessWidget {
               Color(0xFFC17EBD),
               Color(0xFF9B6198),
               Color(0xFF754472),
-              Color(0xFF4E304C), 
+              Color(0xFF4E304C),
             ],
             stops: [0.0, 0.31, 0.62, 1.0],
           ),
@@ -44,16 +43,26 @@ class HomeScreens extends StatelessWidget {
                   children: [
                     Column(
                       children: [
-                        _buildCard('assets/dinero.jpeg', "Mi recibo"),
-                        _buildCard('assets/box.jpeg', "Total de Ordenes"),
-                        _buildCard('assets/estadisticas.jpeg', "Estadistica"),
+                        _buildCard(
+                            context, 'assets/dinero.jpeg', "Mi recibo", () {}),
+                        _buildCard(context, 'assets/box.jpeg',
+                            "Total de Ordenes", () {}),
+                        _buildCard(context, 'assets/estadisticas.jpeg',
+                            "Estadistica", () {}),
                       ],
                     ),
                     Column(
                       children: [
-                        _buildCard('assets/help.jpeg', "Help"),
-                        _buildCard('assets/book.jpeg', "Catalogo"),
-                        _buildCard('assets/buy.jpeg', "Transacciones"),
+                        _buildCard(context, 'assets/help.jpeg', "Help", () {}),
+                        _buildCard(context, 'assets/book.jpeg', "Catalogo", () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProductPage()),
+                          );
+                        }),
+                        _buildCard(
+                            context, 'assets/buy.jpeg', "Transacciones", () {}),
                       ],
                     ),
                   ],
@@ -79,7 +88,7 @@ class HomeScreens extends StatelessWidget {
                     icon: const Icon(Icons.grid_view),
                     onPressed: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => const HomeScreens()));
+                          MaterialPageRoute(builder: (context) => Home()));
                     },
                   ),
                   IconButton(
@@ -88,12 +97,17 @@ class HomeScreens extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const LoginScreens()));
+                              builder: (context) => MiPantalla()));
                     },
                   ),
                   IconButton(
                     icon: const Icon(Icons.settings),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => StoreDetailsScreen()));
+                    },
                   ),
                   IconButton(
                     icon: const Icon(Icons.person),
@@ -108,30 +122,32 @@ class HomeScreens extends StatelessWidget {
     );
   }
 
-  Widget _buildCard(String imageUrl, texto) {
+  Widget _buildCard(
+      BuildContext context, String imageUrl, String texto, VoidCallback onTap) {
     return Card(
       margin: const EdgeInsets.all(10.0),
-
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            imageUrl,
-            fit: BoxFit.cover,
-            width: 120.0,
-            height: 120.0,
-          ),
-          const SizedBox(height: 10.0), // Espacio entre la imagen y el texto
-          Text(
-            '$texto',
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 16.0,
-              fontWeight: FontWeight.bold,
+      child: InkWell(
+        onTap: onTap,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              imageUrl,
+              fit: BoxFit.cover,
+              width: 120.0,
+              height: 120.0,
             ),
-          ),
-        ],
-
+            const SizedBox(height: 10.0), // Espacio entre la imagen y el texto
+            Text(
+              texto,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
