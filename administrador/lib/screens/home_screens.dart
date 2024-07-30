@@ -2,6 +2,7 @@
 
 import 'package:administrador/screens/help_screen.dart';
 import 'package:administrador/screens/login_screens.dart';
+import 'package:administrador/screens/new_product_screens.dart';
 import 'package:administrador/screens/perfil_screen.dart';
 import 'package:administrador/screens/setting_screen.dart';
 import 'package:administrador/screens/stactic_screens.dart';
@@ -129,12 +130,12 @@ class HomeScreens extends StatelessWidget {
                     },
                   ),
                   IconButton(
-                    icon: const Icon(Icons.crop_din_rounded),
+                    icon: const Icon(Icons.add),
                     onPressed: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const LoginScreens()),
+                            builder: (context) => const ProductPage()),
                       );
                     },
                   ),
