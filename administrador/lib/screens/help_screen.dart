@@ -36,125 +36,130 @@ class _AyudaState extends State<HelpScreen> {
               ),
             ),
             SingleChildScrollView(
-              scrollDirection:Axis.vertical,
-              
-              child:Padding(padding: EdgeInsets.only(top: 40 ),child:  Column(
-                children: [
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 16.0, top: 40.0),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                scrollDirection: Axis.vertical,
+                child: Padding(
+                  padding: EdgeInsets.only(top: 40),
+                  child: Column(
+                    children: [
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 16.0, top: 40.0),
+                          child: Column(
                             children: [
-                              IconButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) => const HomeScreens()));
-                                  },
-                                  icon: const Icon(
-                                    Icons.arrow_back_ios,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  IconButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const HomeScreens()));
+                                      },
+                                      icon: const Icon(
+                                        Icons.arrow_back_ios,
+                                        color: Colors.white,
+                                      )),
+                                  SizedBox(width: screenHeight * 0.1),
+                                  const Text(
+                                    'Ayuda',
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 24.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.all(16.0),
+                                child: Center(
+                                  child: Icon(
+                                    CupertinoIcons.person,
+                                    size: 100,
                                     color: Colors.white,
-                                  )),
-                              SizedBox(width: screenHeight * 0.1),
+                                  ),
+                                ),
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.all(16.0),
+                                child: Text(
+                                  '¿En qué podemos ayudarte?',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 24.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              // Campo de búsqueda
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0),
+                                child: TextField(
+                                  decoration: InputDecoration(
+                                    hintText: '¿Qué deseas buscar?',
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                    ),
+                                    prefixIcon: const Icon(Icons.search),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 20),
+                              // Botones de opciones
+                              OptionButton(
+                                icon: Icons.shopping_cart,
+                                text: 'Problemas con el pedido',
+                                onPressed: () {},
+                              ),
+                              OptionButton(
+                                icon: Icons.list_alt,
+                                text: 'Gestión de pedidos',
+                                onPressed: () {},
+                              ),
+                              OptionButton(
+                                icon: Icons.payment,
+                                text: 'Gestión de pagos',
+                                onPressed: () {},
+                              ),
+                              OptionButton(
+                                icon: Icons.account_circle,
+                                text: 'Gestión de cuenta y perfil',
+                                onPressed: () {},
+                              ),
+                              const SizedBox(height: 20),
                               const Text(
-                                'Ayuda',
+                                'Otras Búsquedas',
                                 style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 24.0,
+                                  fontSize: 18.0,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
+                              OptionButton(
+                                icon: Icons.delete,
+                                text: 'Eliminar la información guardada',
+                                onPressed: () {},
+                              ),
+                              OptionButton(
+                                icon: Icons.share,
+                                text: 'Cómo compartir mi catálogo',
+                                onPressed: () {},
+                              ),
                             ],
                           ),
-                          const Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: Center(
-                              child: Icon(
-                                CupertinoIcons.person,
-                                size: 100,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: Text(
-                              '¿En qué podemos ayudarte?',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 24.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                          // Campo de búsqueda
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                            child: TextField(
-                              decoration: InputDecoration(
-                                hintText: '¿Qué deseas buscar?',
-                                filled: true,
-                                fillColor: Colors.white,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                prefixIcon: const Icon(Icons.search),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                          // Botones de opciones
-                          OptionButton(
-                            icon: Icons.shopping_cart,
-                            text: 'Problemas con el pedido',
-                            onPressed: () {},
-                          ),
-                          OptionButton(
-                            icon: Icons.list_alt,
-                            text: 'Gestión de pedidos',
-                            onPressed: () {},
-                          ),
-                          OptionButton(
-                            icon: Icons.payment,
-                            text: 'Gestión de pagos',
-                            onPressed: () {},
-                          ),
-                          OptionButton(
-                            icon: Icons.account_circle,
-                            text: 'Gestión de cuenta y perfil',
-                            onPressed: () {},
-                          ),
-                          const SizedBox(height: 20),
-                          const Text(
-                            'Otras Búsquedas',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          OptionButton(
-                            icon: Icons.delete,
-                            text: 'Eliminar la información guardada',
-                            onPressed: () {},
-                          ),
-                          OptionButton(
-                            icon: Icons.share,
-                            text: 'Cómo compartir mi catálogo',
-                            onPressed: () {},
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
+                      SizedBox(
+                        height: screenHeight * 0.3,
+                      ),
+                    ],
                   ),
-                   SizedBox(height: screenHeight*0.3 ,),
-                ],
-              ),)
-            ),
+                )),
             // Pie de página
             Positioned(
               left: 0,
@@ -180,7 +185,8 @@ class _AyudaState extends State<HelpScreen> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const HomeScreens()),
+                          MaterialPageRoute(
+                              builder: (context) => const HomeScreens()),
                         );
                       },
                     ),
@@ -191,7 +197,8 @@ class _AyudaState extends State<HelpScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const HomeScreens()), // Cambia esto según sea necesario
+                              builder: (context) =>
+                                  const HomeScreens()), // Cambia esto según sea necesario
                         );
                       },
                     ),
@@ -235,10 +242,12 @@ class OptionButton extends StatelessWidget {
         child: ElevatedButton.icon(
           onPressed: onPressed,
           icon: Icon(icon, color: const Color.fromARGB(255, 0, 0, 0)),
-          label: Text(text, style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
+          label: Text(text,
+              style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
           style: ElevatedButton.styleFrom(
             backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-            padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
+            padding:
+                const EdgeInsets.symmetric(vertical: 16.0, horizontal: 20.0),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8.0),
             ),

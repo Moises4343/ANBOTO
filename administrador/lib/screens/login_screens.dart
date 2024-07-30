@@ -220,7 +220,7 @@ class _LoginScreens extends State<LoginScreens> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text('Dont have an account?',
-                          style: TextStyle(fontSize: 16, color: Colors.blue)),
+                          style: TextStyle(fontSize: 16, color: Colors.white)),
                       GestureDetector(
                         onTap: () {
                           Navigator.push(
@@ -230,9 +230,7 @@ class _LoginScreens extends State<LoginScreens> {
                                       const RegisterScreens()));
                         },
                         child: const Text('Sign up here',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Color.fromARGB(255, 255, 255, 255))),
+                            style: TextStyle(fontSize: 16, color: Colors.blue)),
                       ),
                     ],
                   ),

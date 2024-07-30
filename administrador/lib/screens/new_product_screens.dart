@@ -295,7 +295,7 @@ class _ProductPageState extends State<ProductPage> {
             _buildTextField('Precio', _precioController),
             ExpansionTile(
               title: const Text(
-                'Opciones',
+                'Complementos',
                 style: TextStyle(color: Colors.white),
               ),
               children: <Widget>[
