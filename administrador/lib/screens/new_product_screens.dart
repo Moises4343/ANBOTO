@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'package:administrador/screens/comments_screens.dart';
 import 'package:administrador/services/api_services.dart';
 import 'package:flutter/material.dart';
 
@@ -246,6 +247,23 @@ class _ProductPageState extends State<ProductPage> {
                     ),
                     onPressed: () => _onItemTapped(1),
                     child: const Text('Stock'),
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.grey[400],
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CommentsScreen()),
+                      );
+                    },
+                    child: const Text('comentarios'),
                   ),
                 ],
               ),
