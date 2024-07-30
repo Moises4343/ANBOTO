@@ -1,14 +1,17 @@
-import 'dart:ui';
+// ignore_for_file: camel_case_types, sized_box_for_whitespace
 
 import 'package:administrador/screens/home_screens.dart';
 import 'package:administrador/screens/login_screens.dart';
 import 'package:flutter/material.dart';
+import 'dart:ui';
 
 class StacticScreens extends StatelessWidget {
   const StacticScreens({super.key});
 
   @override
   Widget build(BuildContext context) {
+    Size screenSize = MediaQuery.of(context).size;
+    double screenHeight = screenSize.height;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -31,21 +34,39 @@ class StacticScreens extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  const Center(
+                  Center(
                     child: Padding(
-                        padding: EdgeInsets.only(left: 16.0),
+                        padding: const EdgeInsets.only(left: 16.0),
                         child: Column(
                           children: [
-                            Text(
-                              'Estadísticas',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 24.0,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                IconButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const HomeScreens()));
+                                    },
+                                    icon: const Icon(
+                                      Icons.arrow_back_ios,
+                                      color: Color.fromARGB(255, 255, 255, 255),
+                                    )),
+                                SizedBox(width: screenHeight * 0.1),
+                                const Text(
+                                  'Estadísticas',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 24.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
                             ),
-                            SizedBox(height: 16.0),
-                            Padding(
+                            const SizedBox(height: 16.0),
+                            const Padding(
                               padding: EdgeInsets.symmetric(horizontal: 35.0),
                               child: Row(
                                 children: [
@@ -139,13 +160,13 @@ class StacticScreens extends StatelessWidget {
                             child: Row(
                               children: [
                                 Padding(
-                                  padding:
-                                      EdgeInsets.symmetric(horizontal: 40.0),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 40.0),
                                   child: Container(
                                     width: 300,
                                     height:
                                         100, // Altura del contenedor principal (ajústalo según sea necesario)
-                                    padding: EdgeInsets.all(16),
+                                    padding: const EdgeInsets.all(16),
                                     decoration: BoxDecoration(
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(
@@ -407,7 +428,7 @@ class StacticScreens extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Home()),
+                          MaterialPageRoute(builder: (context) => const HomeScreens()),
                         );
                       },
                     ),
@@ -416,7 +437,8 @@ class StacticScreens extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => MiPantalla()),
+                          MaterialPageRoute(
+                              builder: (context) => const LoginScreens()),
                         );
                       },
                     ),
@@ -493,8 +515,7 @@ class BarChartPainter extends CustomPainter {
         TextPainter textPainter = TextPainter(
           text: TextSpan(
             text: labels[i],
-            style: TextStyle(
-                color: const Color.fromARGB(255, 255, 255, 255), fontSize: 12),
+            style: const TextStyle(color: Colors.black, fontSize: 12),
           ),
           textDirection: TextDirection.ltr,
           textAlign: TextAlign.center,
