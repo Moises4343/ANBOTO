@@ -2,6 +2,7 @@ import 'package:administrador/screens/home_screens.dart';
 import 'package:administrador/screens/login_screens.dart';
 import 'package:administrador/screens/paid_filter_screen.dart';
 import 'package:administrador/screens/perfil_screen.dart';
+import 'package:administrador/screens/store_details_screens.dart';
 import 'package:flutter/material.dart';
 
 
@@ -98,7 +99,7 @@ class _ConfiguracionesState extends State<SettingScreen> {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => const StoreDataPage()),
+                          MaterialPageRoute(builder: (context) => const StoreDetailsScreen()),
                         );
                       },
                     ),
