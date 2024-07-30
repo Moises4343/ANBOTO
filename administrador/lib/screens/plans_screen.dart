@@ -1,8 +1,9 @@
 import 'package:administrador/screens/payment_screens.dart';
 import 'package:flutter/material.dart';
 
-class PlanesScreens extends StatelessWidget {
-  const PlanesScreens({super.key});
+
+class CustomGradientBackground extends StatelessWidget {
+  const CustomGradientBackground({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -242,7 +243,7 @@ class PlanesScreens extends StatelessWidget {
                 ),
                 onPressed: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => PaymentScreens(key: key,)));
+                      context, MaterialPageRoute(builder: (context) => const PaymentScreens()));
                 },
                 child: const Text('Siguiente'),
               ),

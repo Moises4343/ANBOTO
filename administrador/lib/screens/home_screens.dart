@@ -1,9 +1,18 @@
+// ignore_for_file: avoid_print
+
+import 'package:administrador/screens/help_screen.dart';
 import 'package:administrador/screens/login_screens.dart';
-import 'package:administrador/screens/new_product_screens.dart';
-import 'package:administrador/screens/store_details_screens.dart';
+import 'package:administrador/screens/perfil_screen.dart';
+import 'package:administrador/screens/setting_screen.dart';
+import 'package:administrador/screens/stactic_screens.dart';
+import 'package:administrador/screens/subscription_screen.dart';
+import 'package:administrador/screens/total_orders_screen.dart';
+import 'package:administrador/screens/transactions_screen.dart';
 import 'package:flutter/material.dart';
 
-class Home extends StatelessWidget {
+class HomeScreens extends StatelessWidget {
+  const HomeScreens({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,26 +52,52 @@ class Home extends StatelessWidget {
                   children: [
                     Column(
                       children: [
-                        _buildCard(
-                            context, 'assets/dinero.jpeg', "Mi recibo", () {}),
-                        _buildCard(context, 'assets/box.jpeg',
-                            "Total de Ordenes", () {}),
-                        _buildCard(context, 'assets/estadisticas.jpeg',
-                            "Estadistica", () {}),
+                        _buildCard('assets/dinero.jpeg', "Mi recibo", () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>  const ReceiptPage()));
+                        }),
+                        _buildCard('assets/box.jpeg', "Total de Ordenes", () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>  TotalOrdersScreen()));
+                        }),
+                        _buildCard('assets/estadisticas.jpeg', "Estadistica",
+                            () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const StacticScreens()),
+                          );
+                        }),
                       ],
                     ),
                     Column(
                       children: [
-                        _buildCard(context, 'assets/help.jpeg', "Help", () {}),
-                        _buildCard(context, 'assets/book.jpeg', "Catalogo", () {
+                        _buildCard('assets/help.jpeg', "Help", () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ProductPage()),
+                                builder: (context) => const HelpScreen()),
+                          );
+                          
+                        }),
+                        _buildCard('assets/book.jpeg', "Catalogo", () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const SubscriptionScreen()),
                           );
                         }),
-                        _buildCard(
-                            context, 'assets/buy.jpeg', "Transacciones", () {}),
+                        _buildCard('assets/buy.jpeg', "Transacciones", () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const TransactionsScreen()),
+                          );
+                        }),
                       ],
                     ),
                   ],
@@ -87,31 +122,41 @@ class Home extends StatelessWidget {
                   IconButton(
                     icon: const Icon(Icons.grid_view),
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Home()));
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const HomeScreens()),
+                      );
                     },
                   ),
                   IconButton(
                     icon: const Icon(Icons.crop_din_rounded),
                     onPressed: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MiPantalla()));
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const LoginScreens()),
+                      );
                     },
                   ),
                   IconButton(
                     icon: const Icon(Icons.settings),
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => StoreDetailsScreen()));
+                                            Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SettingScreen()),
+                      );
                     },
                   ),
                   IconButton(
                     icon: const Icon(Icons.person),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const PerfilScreen()),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -122,12 +167,11 @@ class Home extends StatelessWidget {
     );
   }
 
-  Widget _buildCard(
-      BuildContext context, String imageUrl, String texto, VoidCallback onTap) {
-    return Card(
-      margin: const EdgeInsets.all(10.0),
-      child: InkWell(
-        onTap: onTap,
+  Widget _buildCard(String imageUrl, String texto, void Function()? onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Card(
+        margin: const EdgeInsets.all(10.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
