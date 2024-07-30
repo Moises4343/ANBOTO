@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_print
 
 import 'package:administrador/screens/help_screen.dart';
-import 'package:administrador/screens/login_screens.dart';
 import 'package:administrador/screens/new_product_screens.dart';
 import 'package:administrador/screens/perfil_screen.dart';
 import 'package:administrador/screens/setting_screen.dart';
@@ -57,13 +56,13 @@ class HomeScreens extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>  const ReceiptPage()));
+                                  builder: (context) => const ReceiptPage()));
                         }),
                         _buildCard('assets/box.jpeg', "Total de Ordenes", () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>  TotalOrdersScreen()));
+                                  builder: (context) => TotalOrdersScreen()));
                         }),
                         _buildCard('assets/estadisticas.jpeg', "Estadistica",
                             () {
@@ -83,20 +82,21 @@ class HomeScreens extends StatelessWidget {
                             MaterialPageRoute(
                                 builder: (context) => const HelpScreen()),
                           );
-                          
                         }),
                         _buildCard('assets/book.jpeg', "Catalogo", () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const SubscriptionScreen()),
+                                builder: (context) =>
+                                    const SubscriptionScreen()),
                           );
                         }),
                         _buildCard('assets/buy.jpeg', "Transacciones", () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const TransactionsScreen()),
+                                builder: (context) =>
+                                    const TransactionsScreen()),
                           );
                         }),
                       ],
@@ -125,7 +125,8 @@ class HomeScreens extends StatelessWidget {
                     onPressed: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => const HomeScreens()),
+                        MaterialPageRoute(
+                            builder: (context) => const HomeScreens()),
                       );
                     },
                   ),
@@ -142,7 +143,7 @@ class HomeScreens extends StatelessWidget {
                   IconButton(
                     icon: const Icon(Icons.settings),
                     onPressed: () {
-                                            Navigator.push(
+                      Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => const SettingScreen()),
@@ -156,6 +157,16 @@ class HomeScreens extends StatelessWidget {
                         context,
                         MaterialPageRoute(
                             builder: (context) => const PerfilScreen()),
+                      );
+                    },
+                  ),
+                  IconButton(
+                    icon: const Icon(Icons.attach_money),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SubscriptionScreen()),
                       );
                     },
                   ),
