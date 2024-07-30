@@ -53,7 +53,7 @@ class PerfilScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 16.0),
                     const Text(
-                      'Alfredo de Jesús Borraz',
+                      'Julia Guillen Borraz',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 24.0,
@@ -61,7 +61,7 @@ class PerfilScreen extends StatelessWidget {
                       ),
                     ),
                     const Text(
-                      'alfredo@gmail.com',
+                      'Julia@gmail.com',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16.0,
