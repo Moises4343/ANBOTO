@@ -87,8 +87,7 @@ class HomeScreens extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    const SubscriptionScreen()),
+                                builder: (context) => EnProduccion()),
                           );
                         }),
                         _buildCard('assets/buy.jpeg', "Transacciones", () {
@@ -204,6 +203,18 @@ class HomeScreens extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+// Asegúrate de definir la vista LoginScreen
+class EnProduccion extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(
+        child: const Text('Esta siendo trabajada...'),
       ),
     );
   }
