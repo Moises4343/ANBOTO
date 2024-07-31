@@ -1,6 +1,147 @@
+import 'package:administrador/services/api_services.dart';
 import 'package:flutter/material.dart';
 
-class CommentsScreen extends StatelessWidget {
+class CommentsScreen extends StatefulWidget {
+  @override
+  _CommentsScreenState createState() => _CommentsScreenState();
+}
+
+class _CommentsScreenState extends State<CommentsScreen> {
+  final ApiService _apiService = ApiService();
+  List<dynamic> _reviews = [];
+  bool _isLoading = false;
+  final TextEditingController _reviewController = TextEditingController();
+
+  double averageRating = 0.0;
+  Map<int, double> ratingDistribution = {
+    1: 0.0,
+    2: 0.0,
+    3: 0.0,
+    4: 0.0,
+    5: 0.0,
+  };
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchReviews();
+  }
+
+  Future<void> _fetchReviews() async {
+    setState(() {
+      _isLoading = true;
+    });
+    try {
+      List<dynamic> reviews = await _apiService.getAllOpinions();
+      setState(() {
+        _reviews = reviews;
+        _calculateRatingDistribution();
+      });
+    } catch (e) {
+      print('Error fetching reviews: $e');
+    } finally {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  Future<void> _submitReview(String reviewText) async {
+    final data = {
+      'contenido': reviewText,
+    };
+
+    try {
+      final response = await _apiService.createOpinion(data);
+      if (response != null) {
+        _fetchReviews();
+      }
+    } catch (e) {
+      print('Error submitting review: $e');
+    }
+  }
+
+  void _calculateRatingDistribution() {
+    if (_reviews.isEmpty) return;
+
+    Map<int, int> ratingCounts = {
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+      5: 0,
+    };
+
+    double totalRating = 0.0;
+
+    for (var review in _reviews) {
+      int rating = review['calificacion'] ?? 0;
+      if (rating >= 1 && rating <= 5) {
+        ratingCounts[rating] = (ratingCounts[rating] ?? 0) + 1;
+        totalRating += rating;
+      }
+    }
+
+    setState(() {
+      averageRating = totalRating / _reviews.length;
+
+      for (var entry in ratingCounts.entries) {
+        ratingDistribution[entry.key] = entry.value / _reviews.length;
+      }
+    });
+  }
+
+  void _showReviewDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Escribir una reseña'),
+          content: TextField(
+            controller: _reviewController,
+            maxLines: 3,
+            decoration: const InputDecoration(
+              hintText: 'Escribe tu reseña aquí...',
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Cancelar'),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                String reviewText = _reviewController.text;
+                if (reviewText.isNotEmpty) {
+                  _submitReview(reviewText);
+                  Navigator.of(context).pop();
+                  _reviewController.clear();
+                } else {
+                  showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                      title: const Text('Error'),
+                      content: const Text('La reseña no puede estar vacía.'),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: const Text('OK'),
+                        ),
+                      ],
+                    ),
+                  );
+                }
+              },
+              child: const Text('Enviar comentario'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,20 +172,20 @@ class CommentsScreen extends StatelessWidget {
                   },
                 ),
                 const SizedBox(height: 16),
-                const Center(
+                Center(
                   child: Column(
                     children: [
                       Text(
-                        '3.9',
-                        style: TextStyle(
+                        averageRating.toStringAsFixed(1),
+                        style: const TextStyle(
                           fontSize: 48,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
                       ),
                       Text(
-                        '19 reseñas',
-                        style: TextStyle(
+                        '${_reviews.length} reseñas',
+                        style: const TextStyle(
                           fontSize: 16,
                           color: Colors.white,
                         ),
@@ -53,7 +194,7 @@ class CommentsScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                ReviewBars(),
+                ReviewBars(ratingDistribution: ratingDistribution),
                 const SizedBox(height: 16),
                 Center(
                   child: ElevatedButton(
@@ -68,26 +209,23 @@ class CommentsScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 16),
-                Expanded(
-                  child: ListView(
-                    children: [
-                      ReviewTile(
-                        username: 'Pedro',
-                        review:
-                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                        rating: 4,
-                        timeAgo: 'Hace 2 semanas',
+                _isLoading
+                    ? const Center(child: CircularProgressIndicator())
+                    : Expanded(
+                        child: ListView.builder(
+                          itemCount: _reviews.length,
+                          itemBuilder: (context, index) {
+                            final review = _reviews[index];
+                            return ReviewTile(
+                              username: review['username'] ?? 'Anonymous',
+                              review: review['contenido'],
+                              rating: review['calificacion'] ?? 0,
+                              timeAgo: review['createdAt'],
+                              sentimentScores: review['sentiment_scores'],
+                            );
+                          },
+                        ),
                       ),
-                      ReviewTile(
-                        username: 'Juan',
-                        review:
-                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                        rating: 4,
-                        timeAgo: 'Hace 2 semanas',
-                      ),
-                    ],
-                  ),
-                ),
               ],
             ),
           ),
@@ -95,56 +233,19 @@ class CommentsScreen extends StatelessWidget {
       ),
     );
   }
-
-  void _showReviewDialog(BuildContext context) {
-    final TextEditingController _reviewController = TextEditingController();
-
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Escribir una reseña'),
-          content: TextField(
-            controller: _reviewController,
-            maxLines: 3,
-            decoration: const InputDecoration(
-              hintText: 'Escribe tu reseña aquí...',
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('Cancelar'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                // Aquí puedes agregar el código para enviar la reseña
-                String reviewText = _reviewController.text;
-                print('Reseña enviada: $reviewText');
-                Navigator.of(context).pop();
-              },
-              child: const Text('Enviar comentario'),
-            ),
-          ],
-        );
-      },
-    );
-  }
 }
 
 class ReviewBars extends StatelessWidget {
+  final Map<int, double> ratingDistribution;
+
+  ReviewBars({required this.ratingDistribution});
+
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
-        ReviewBar(rating: 5, percentage: 0.5),
-        ReviewBar(rating: 4, percentage: 0.3),
-        ReviewBar(rating: 3, percentage: 0.1),
-        ReviewBar(rating: 2, percentage: 0.05),
-        ReviewBar(rating: 1, percentage: 0.05),
-      ],
+      children: ratingDistribution.entries.map((entry) {
+        return ReviewBar(rating: entry.key, percentage: entry.value);
+      }).toList(),
     );
   }
 }
@@ -181,12 +282,14 @@ class ReviewTile extends StatelessWidget {
   final String review;
   final int rating;
   final String timeAgo;
+  final String sentimentScores;
 
   ReviewTile({
     required this.username,
     required this.review,
     required this.rating,
     required this.timeAgo,
+    required this.sentimentScores,
   });
 
   @override
@@ -228,6 +331,11 @@ class ReviewTile extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               review,
+              style: const TextStyle(color: Colors.white),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              'Sentiment Scores: $sentimentScores',
               style: const TextStyle(color: Colors.white),
             ),
           ],

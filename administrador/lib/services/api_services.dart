@@ -83,6 +83,31 @@ class ApiService {
     return deleteData('producto/$id');
   }
 
+  // Fetch all opinions
+  Future<dynamic> getAllOpinions() async {
+    return fetchData('opinion');
+  }
+
+// Fetch single opinion by ID
+  Future<dynamic> getOpinionById(String id) async {
+    return fetchData('opinion/$id');
+  }
+
+// Create new opinion
+  Future<dynamic> createOpinion(Map<String, dynamic> data) async {
+    return postData('opinion', data);
+  }
+
+// Update existing opinion
+  Future<dynamic> updateOpinion(String id, Map<String, dynamic> data) async {
+    return putData('opinion/$id', data);
+  }
+
+// Delete opinion
+  Future<dynamic> deleteOpinion(String id) async {
+    return deleteData('opinion/$id');
+  }
+
   // Generic fetch data method
   Future<dynamic> fetchData(String endpoint) async {
     final response = await http.get(Uri.parse(baseUrl + endpoint));
