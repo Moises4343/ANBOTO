@@ -94,11 +94,11 @@ class _RegistroState extends State<RegisterScreens> {
                       0.2, // Responsive height
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 153, 94, 149),
-                    borderRadius: BorderRadius.circular(40),
+                    borderRadius: BorderRadius.circular(401),
                   ),
                   child: const Center(
                     child: Text(
-                      "Create Account",
+                      "¡Registrate!",
                       style: TextStyle(
                         fontSize: 40,
                         fontWeight: FontWeight.bold,
@@ -112,16 +112,29 @@ class _RegistroState extends State<RegisterScreens> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      const TextFieldLabel(label: 'Name'),
+                      const TextFieldLabel(label: 'Nombre'),
                       CustomTextField(controller: _nameController),
-                      const TextFieldLabel(label: 'Number'),
+                      const TextFieldLabel(label: 'Numero de celular'),
                       CustomTextField(controller: _numberController),
-                      const TextFieldLabel(label: 'Email'),
+                      const TextFieldLabel(label: 'Correo Electronico'),
                       CustomTextField(controller: _emailController),
-                      const TextFieldLabel(label: 'Password'),
+                      const TextFieldLabel(label: 'Contraseña'),
                       CustomTextField(controller: _passwordController),
-                      const TextFieldLabel(label: 'Date'),
-                      CustomTextField(controller: _dateController),
+                      TextField(
+                        controller: _dateController,
+                        decoration: InputDecoration(
+                          labelText: 'Fecha de Nacimiento',
+                          filled: true,
+                          prefixIcon: Icon(Icons.calendar_month_outlined),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(40.0),
+                              borderSide: BorderSide.none),
+                        ),
+                        readOnly: true,
+                        onTap: () {
+                          _selectDate();
+                        },
+                      ),
                       Row(
                         children: [
                           Checkbox(
@@ -133,7 +146,7 @@ class _RegistroState extends State<RegisterScreens> {
                             },
                           ),
                           const Text(
-                            'I accept terms and conditions',
+                            'Acepta los Terminos y Condiciones',
                             style: TextStyle(
                               color: Colors.white,
                             ),
@@ -170,6 +183,20 @@ class _RegistroState extends State<RegisterScreens> {
       ),
     );
   }
+
+  Future<void> _selectDate() async {
+    DateTime? _picked = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2000),
+        lastDate: DateTime(2100));
+
+    if (_picked != null) {
+      setState(() {
+        _dateController.text = _picked.toString().split(" ")[0];
+      });
+    }
+  }
 }
 
 class TextFieldLabel extends StatelessWidget {
@@ -183,7 +210,7 @@ class TextFieldLabel extends StatelessWidget {
       label,
       style: const TextStyle(
         color: Colors.white,
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: FontWeight.bold,
       ),
     );

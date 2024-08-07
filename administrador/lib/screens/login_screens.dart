@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class LoginScreens extends StatefulWidget {
-  const LoginScreens({Key? key}) : super(key: key);
+  const LoginScreens({super.key});
 
   @override
   _LoginScreens createState() => _LoginScreens();
@@ -39,7 +39,7 @@ class _LoginScreens extends State<LoginScreens> {
       var data = json.decode(response.body);
 
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (_) => HomeScreens()));
+          context, MaterialPageRoute(builder: (_) => const HomeScreens()));
     } else {
       showDialog(
         context: context,
@@ -103,7 +103,7 @@ class _LoginScreens extends State<LoginScreens> {
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Container(
+                        SizedBox(
                           height: screenHeight * 0.2,
                           child: Image.asset('assets/app_logo.jpeg'),
                         ),
@@ -172,7 +172,7 @@ class _LoginScreens extends State<LoginScreens> {
                           ],
                         ),
                         const SizedBox(height: 20),
-                        Container(
+                        SizedBox(
                           width: double.infinity,
                           height: 50,
                           child: ElevatedButton(
